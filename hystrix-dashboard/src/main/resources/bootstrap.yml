@@ -1,0 +1,19 @@
+
+spring:
+  application:
+    name: hystrix-dashboard
+  cloud:
+    config:
+      uri: http://localhost:8888/
+      profile: DEV
+#  profiles.active: ${profile:default}
+#
+#                    spring.profiles: DEV
+#spring:
+#  profiles.active: ${profile:default}
+#  cloud:
+#    config:
+#      uri : http://localhost:8888/
+#      fail-fast: true
+#  application:
+#    name: hystrix-dashboard
