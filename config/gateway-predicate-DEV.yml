@@ -1,12 +1,59 @@
+#spring:
+#  profiles:
+#    active: method_route
+
+server:
+  port: 8081
+
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-server:
-  port: 8088
-#spring:
-#  profiles:
-#    active: after_route
+
+#---
+spring:
+#  profiles: method_route
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+      routes:
+#      - id: after_route
+#        uri: http://httpbin.org:80/get
+#        predicates:
+#        - After=2017-01-20T17:42:47.789-07:00[America/Denver]
+      - id: method_route
+        uri: lb://EUREKACLIENT
+#        uri: http://httpbin.org:80/get
+        predicates:
+#          - Path=/hi
+        - Method=GET
+#      - id: header_route
+#        uri: http://httpbin.org:80/get
+#        predicates:
+#        - Header=X-Request-Id, \d+
+#      - id: cookie_route
+#        uri: http://httpbin.org:80/get
+#        predicates:
+#        - Cookie=name, forezp
+#
+#      - id: host_route
+#        uri: http://httpbin.org:80/get
+#        predicates:
+#        - Host=**.fangzhipeng.com
+#      - id: path_route
+#        uri: http://httpbin.org:80/get
+#        predicates:
+#        - Path=/foo/{segment}
+#      - id: query_route
+#        uri: http://httpbin.org:80/get
+#        predicates:
+#        - Query=foo, ba.
+
 
 #spring:
 #  cloud:
@@ -15,41 +62,3 @@ server:
 #        locator:
 #          enabled: true
 #          lowerCaseServiceId: true
-#---
-#spring:
-#  cloud:
-#    gateway:
-#      discovery:
-#        locator:
-#          enabled: true
-#          lowerCaseServiceId: true
-#      routes:
-#        - id: after_route
-#          uri: lb://EUREKACLIENT
-#          predicates:
-          - After=2017-01-20T17:42:47.789-07:00[America/Denver]
-#          - id: header_route
-#          uri: http://httpbin.org:80/get
-#          predicates:
-#          - Header=X-Request-Id, \d+
-#          - id: cookie_route
-#          uri: http://httpbin.org:80/get
-#          predicates:
-#          - Cookie=name, forezp
-#          - id: host_route
-#          uri: http://httpbin.org:80/get
-#          predicates:
-#          - Host=**.fangzhipeng.com
-#          - id: method_route
-#          uri: http://httpbin.org:80/get
-#          predicates:
-#          - Method=GET
-#          - id: path_route
-#          uri: http://httpbin.org:80/get
-#          predicates:
-#          - Path=/foo/{segment}
-#          - id: query_route
-#          uri: http://httpbin.org:80/get
-#          predicates:
-#          - Query=foo, ba.
-#  profiles: after_route
