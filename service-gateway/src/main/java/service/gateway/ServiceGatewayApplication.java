@@ -28,7 +28,7 @@ public class ServiceGatewayApplication {
 		String httpUri = "http://httpbin.org:80";
 		return builder.routes().route(p -> p
                 .path("/get")
-                .filters(f -> f.addRequestHeader("",""))
+                .filters(f -> f.addRequestHeader("hello","world"))
                 .uri(httpUri))
                 .route(p -> p
                 .host("*.hystrix.com")
